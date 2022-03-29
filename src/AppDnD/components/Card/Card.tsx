@@ -1,7 +1,7 @@
 import React from "react";
 import "./Card.css";
 import { useDrag } from "react-dnd";
-import { Card, Position } from "../../types";
+import { Card, Position } from "../../../types";
 
 interface Props extends Card {
   title?: string;

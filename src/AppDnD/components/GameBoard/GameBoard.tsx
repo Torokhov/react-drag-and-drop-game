@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import { observer } from "mobx-react";
 import { Card } from "../Card";
 import { Box } from "../Box";
-import { StoreContext } from "../../providers/StoreProvider/StoreProvider";
+import { useStore } from "../../../providers/StoreProvider";
 
 import "./GameBoard.css";
-import { Position } from "../../types";
+import { Position } from "../../../types";
 
 export const GameBoard = observer(() => {
-  const { store } = useContext(StoreContext);
+  const store = useStore();
   const onDrop = (color: string, position: Position) =>
     store?.setCardPosition(color, position);
   return (

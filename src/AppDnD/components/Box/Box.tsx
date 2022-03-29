@@ -2,7 +2,7 @@ import React from "react";
 import { useDrop } from "react-dnd";
 
 import "./Box.css";
-import { Box, Card } from "../../types";
+import { Box, Card } from "../../../types";
 
 interface Props extends Box {
   title?: string;

@@ -66,5 +66,3 @@ export class Store {
     this.cards[index].position = newPosition;
   }
 }
-
-export const store = new Store();
