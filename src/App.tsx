@@ -1,12 +1,14 @@
 import React from "react";
 import "./App.css";
 import { GameBoard } from "./components/GameBoard";
+import { StoreProvider } from "./providers/StoreProvider";
+import { store } from "./store";
 
 function App() {
   return (
-    <div>
+    <StoreProvider store={store}>
       <GameBoard />
-    </div>
+    </StoreProvider>
   );
 }
 
