@@ -1,38 +1,29 @@
 import React from "react";
 import "./Card.css";
 import { useDrag } from "react-dnd";
-import { Card } from "../../types";
+import { Card, Position } from "../../types";
 
 interface Props extends Card {
   title?: string;
+  onDrop: (color: string, position: Position) => void;
 }
 
-export const CardComponent = ({ color, position, title }: Props) => {
-  // const [collected, drag, dragPreview] = useDrag(() => ({
-  //   type: "CARD",
-  //   item: { id: 1 },
-  //   collect: (monitor) => ({
-  //     isDragging: monitor.isDragging(),
-  //   }),
-  //   end: (draggedItem, monitor) => {
-  //     console.log(draggedItem);
-  //     console.log(monitor.getDropResult());
-  //   },
-  // }));
-  //
-  // if (collected.isDragging) {
-  //   return (
-  //     <div
-  //       ref={dragPreview}
-  //       style={{ backgroundColor: "purple" }}
-  //       className={"card"}
-  //     >
-  //       {title}
-  //     </div>
-  //   );
-  // }
+export const CardComponent = ({ color, position, title, onDrop }: Props) => {
+  const [_, drag] = useDrag<Card, Card>(() => ({
+    type: "CARD",
+    item: { color, position },
+
+    end: (draggedItem, monitor) => {
+      const dropResult = monitor.getDropResult();
+      if (dropResult) {
+        onDrop(dropResult.color, dropResult.position);
+      }
+    },
+  }));
+
   return (
     <div
+      ref={drag}
       style={{
         backgroundColor: color,
         top: `${position.top}px`,

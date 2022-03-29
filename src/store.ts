@@ -1,5 +1,12 @@
 import { makeAutoObservable } from "mobx";
-import { Box, Card, createBox, createCard, createPosition } from "./types";
+import {
+  Box,
+  Card,
+  createBox,
+  createCard,
+  createPosition,
+  Position,
+} from "./types";
 
 export class Store {
   private readonly boxes: Box[];
@@ -52,6 +59,11 @@ export class Store {
 
   get getCards() {
     return this.cards;
+  }
+
+  setCardPosition(color: string, newPosition: Position) {
+    const index = this.cards.findIndex((card) => card.color === color);
+    this.cards[index].position = newPosition;
   }
 }
 

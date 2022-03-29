@@ -2,23 +2,24 @@ import React from "react";
 import { useDrop } from "react-dnd";
 
 import "./Box.css";
-import { Box } from "../../types";
+import { Box, Card } from "../../types";
 
 interface Props extends Box {
   title?: string;
 }
 
 export const BoxComponent = ({ title, color, position }: Props) => {
-  // const [collectedProps, drop] = useDrop(() => ({
-  //   accept: "CARD",
-  //   drop: (item) => {
-  //     console.log(item);
-  //     return { item, isDropped: true };
-  //   },
-  // }));
+  const [_, drop] = useDrop<Card, Card>(() => ({
+    accept: "CARD",
+    drop: (item) => {
+      return { ...item, position };
+    },
+    canDrop: (item) => item.color === color,
+  }));
 
   return (
     <div
+      ref={drop}
       style={{ top: `${position.top}px`, left: `${position.left}px` }}
       className={"box"}
     >
